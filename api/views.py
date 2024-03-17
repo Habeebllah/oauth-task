@@ -11,9 +11,11 @@ class GoogleSignupSocialAuthView(GenericAPIView):
         Send an idtoken as from google to get user information
         """
         serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        data = ((serializer.validated_data)['auth_token'])
-        return Response(data, status=status.HTTP_200_OK)
+        if serializer.is_valid(raise_exception=True):
+            data = ((serializer.validated_data)['auth_token'])
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
 class GoogleLoginSocialAuthView(GenericAPIView):
@@ -24,6 +26,8 @@ class GoogleLoginSocialAuthView(GenericAPIView):
         Send an idtoken as from google to get user information
         """
         serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        data = ((serializer.validated_data)['auth_token'])
-        return Response(data, status=status.HTTP_200_OK)
+        if serializer.is_valid(raise_exception=True):
+            data = ((serializer.validated_data)['auth_token'])
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
