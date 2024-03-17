@@ -51,4 +51,4 @@ def test_google_oauth_login_api(api_client):
 
     response = api_client.post(url, data=mock_google_oauth_response, format='json')
     assert response.status_code == status.HTTP_200_OK
-    assert 'token' in response.data
+    assert 'tokens' in response.data
