@@ -17,6 +17,8 @@ schema_view = get_schema_view(
     public=False,
     permission_classes=(permissions.AllowAny,),
 )
+admin.site.site_title = f"Oauth Task"
+admin.site.site_header = f"Welcome To Oauth Task Admin Panel"
 
 urlpatterns = [
     path('admin/', admin.site.urls),

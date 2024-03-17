@@ -1,38 +1,29 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
-from .serializers import GoogleTokenSerializer
-from allauth.socialaccount.models import SocialAccount
-from django.contrib.auth import authenticate, login
+from rest_framework.response import Response
+from rest_framework.generics import GenericAPIView
+from .serializers import *
 
-class GoogleLoginView(APIView):
+class GoogleSignupSocialAuthView(GenericAPIView):
+    serializer_class = GoogleSignupSocialAuthSerializer
     def post(self, request):
-        serializer = GoogleTokenSerializer(data=request.data)
-        if serializer.is_valid():
-            token = serializer.validated_data.get('token')
-            user = authenticate(google_auth_token=token)
-            if user:
-                login(request, user)
-                return Response({'message': 'Login successful'})
-            else:
-                return Response({'message': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        """
+        POST with "auth_token"
+        Send an idtoken as from google to get user information
+        """
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = ((serializer.validated_data)['auth_token'])
+        return Response(data, status=status.HTTP_200_OK)
+    
 
-class GoogleSignupView(APIView):
+class GoogleLoginSocialAuthView(GenericAPIView):
+    serializer_class = GoogleLoginSocialAuthSerializer
     def post(self, request):
-        serializer = GoogleTokenSerializer(data=request.data)
-        if serializer.is_valid():
-            token = serializer.validated_data.get('token')
-            # Get user info from Google using the token
-            # For example:
-            # social_account = SocialAccount.objects.get(token=token)
-            # email = social_account.extra_data.get('email')
-            # Create user account with retrieved info
-            # user = User.objects.create(email=email, ...)
-            # user.save()
-            # Then authenticate and login the user
-            # login(request, user)
-            return Response({'message': 'Signup successful'})
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        """
+        POST with "auth_token"
+        Send an idtoken as from google to get user information
+        """
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = ((serializer.validated_data)['auth_token'])
+        return Response(data, status=status.HTTP_200_OK)
