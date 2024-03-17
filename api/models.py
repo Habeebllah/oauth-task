@@ -1,12 +1,7 @@
 from django.db import models
-
-# Create your models here.
-from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager, PermissionsMixin)
-
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
-
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
@@ -14,7 +9,6 @@ class UserManager(BaseUserManager):
             raise TypeError('Users should have a username')
         if email is None:
             raise TypeError('Users should have a Email')
-
         user = self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
         user.save()
@@ -29,7 +23,6 @@ class UserManager(BaseUserManager):
         user.is_staff = True
         user.save()
         return user
-
 
 AUTH_PROVIDERS = {'apple': 'apple', 'google': 'google',
                   'twitter': 'twitter', 'email': 'email'}

@@ -36,10 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'api',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'rest_framework.authtoken',
@@ -82,7 +78,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Add the account middleware:
-    "allauth.account.middleware.AccountMiddleware",
     'drf_api_logger.middleware.api_logger_middleware.APILoggerMiddleware',
 ]
 
@@ -99,7 +94,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request',
             ],
         },
     },
@@ -182,10 +176,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
