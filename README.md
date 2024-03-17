@@ -22,9 +22,19 @@
     ```
     /api/register/: Register a new user using OAuth.
     /api/login/ : Login an existing user using OAuth.
-    ```
 
+    <id_token> is the required payload to be passed endpoints from the Frontend
+    ```
 - PostgreSQL database is utilized.
 - Implementation of logging to record API requests and responses.
 - Effective Use Django's serializers for data validation and serialization.
 - Implement rate limiting for the API endpoints.
+
+# Setting up .env variables
+```
+GOOGLE_CLIENT_ID = <>
+GOOGLE_CLIENT_SECRET = <>
+SOCIAL_SECRET = <>
+POSTGRESQL_USER = <>
+POSTGRESQL_PASSWORD = <>
+```
