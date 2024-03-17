@@ -27,6 +27,7 @@
     ```
 - PostgreSQL database is utilized.
 - Implementation of logging to record API requests and responses.
+- Effective testing using `pytest`
 - Effective Use Django's serializers for data validation and serialization.
 - Implement rate limiting for the API endpoints.
 
